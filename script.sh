@@ -471,6 +471,9 @@ NGINX_SELF
 
 # Função para escolher método SSL
 choose_ssl_method() {
+if [ ! -t 0 ]; then
+    exec < /dev/tty
+fi
     if [[ -n "$SSL_METHOD" ]]; then
         case $SSL_METHOD in
             letsencrypt) setup_letsencrypt ;;
